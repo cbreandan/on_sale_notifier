@@ -6,16 +6,17 @@ var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
 require('./date.js');
-var date = new Date().toString('dd/MM');
+var date = new Date().toString('dd/MM/yyyy');
 
 //store all items you would like to purchase in this array 
 var wish_list_urls = [
 	'http://www.amazon.ca/gp/product/B00NF47XBW?dpID=51wbcAAkStL&dpSrc=sims&preST=_SL500_SR135%2C135_&refRID=RHYBH11BACHNT6194S5C&ref_=pd_rhf_gw_s_cp_2',
 	'http://www.amazon.ca/gp/product/B00NA00MWS?redirect=true&ref_=br_asw_pdt-3',
-	'http://www.amazon.com/Xbox-One-Elite-Wireless-Controller/dp/B00ZDNNRB8/ref=sr_1_28?s=electronics&ie=UTF8&qid=1456165519&sr=1-28&refinements=p_n_availability%3A1248801011'
+	'http://www.amazon.com/Xbox-One-Elite-Wireless-Controller/dp/B00ZDNNRB8/ref=sr_1_28?s=electronics&ie=UTF8&qid=1456165519&sr=1-28&refinements=p_n_availability%3A1248801011',
+	'http://www.amazon.ca/gp/product/B00NF47XBW?dpID=51wbcAAkStL&dpSrc=sims&preST=_SL500_SR135%2C135_&refRID=RHYBH11BACHNT6194S5C&ref_=pd_rhf_gw_s_cp_2'
 ];
 
-var message = '<b>Hi, Breandan! On sale items on your wishlist include: </b>';
+var message = 'Hello There!<br> <br> <b>This email is notifying you that some of the items on your wish-list are on sale today! </b><br>';
 
 async.eachSeries(wish_list_urls, function(item, next_item){
 	request(item, function(err, response, body){
@@ -36,7 +37,8 @@ async.eachSeries(wish_list_urls, function(item, next_item){
 				console.log('Savings: ' + savings);
 				console.log(savings != '');
 				if (savings != ''){
-					message = message + product + ' : ORIGINAL PRICE ' + list_price + ' ,NOW ' + price + ' , YOU SAVE ' + savings + ' !!!!!! ';
+					message = message + '<br>' + product + ' :' + '<br>' + '<b>ORIGINAL PRICE:</b> ' + list_price + ' ,<b>NOW:</b> ' + 
+					price + ' , <b>YOU SAVE:</b> ' + savings + '<br>' + 'Purchase: ' + item + '<br><br>';
 				}
 			});
 			$('#availability').each(function(index, items){
@@ -53,7 +55,7 @@ async.eachSeries(wish_list_urls, function(item, next_item){
 }, function(){
 	console.log(message);
 
-	if (message == '<b>Hi, Breandan! On sale items on your wishlist include: </b>'){
+	if (message == 'Hello There!<br> <br> <b>This email is notifying you that some of the items on your wish-list are on sale today! </b><br>'){
 		//do nothing
 	} else {
 		// make sure you 'turn on' to allow access for less secure apps
@@ -71,7 +73,7 @@ async.eachSeries(wish_list_urls, function(item, next_item){
 		var mailOptions = {
 		    from: 'amazon.discount.mailer@gmail.com', 
 		    to: 'cbreandan@gmail.com', 
-		    subject: 'Items on your wish-list are on sale!!!' + date, 
+		    subject: 'Items on your wish-list are on sale! ' + date, 
 		    text: '', 
 		    html: message
 		}
