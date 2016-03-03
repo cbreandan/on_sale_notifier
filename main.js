@@ -77,9 +77,11 @@ if (wish_list_urls_amazon.length > 0){
 						console.log(savings);
 						availability = $(items).find('span#qtySubTxt').text().trim();
 						console.log(availability);
+						shipping = $(items).find('#fshippingCost').text().trim();
+						console.log(shipping);
 						if (savings != ''){
 							message = message + '<br>' + product + ' :' + '<br>' + '<b>ORIGINAL PRICE:</b> ' + list_price + ' ,<b>NOW:</b> ' + 
-							price + ' , <b>YOU SAVE:</b> ' + savings + ' , <b>Availability:</b> ' + availability + '<br>' + 'Purchase: ' + item + '<br><br>';
+							price + ' , <b>YOU SAVE:</b> ' + savings + ' , <b>Availability:</b> ' + availability + ' , <b>Shipping:</b> ' + shipping+ '<br>' + 'Purchase: ' + item + '<br><br>';
 						}
 					});
 					return next_item();
@@ -138,9 +140,11 @@ if (wish_list_urls_amazon.length > 0){
 					console.log(savings);
 					availability = $(items).find('span#qtySubTxt').text().trim();
 					console.log(availability);
+					shipping = $(items).find('#fshippingCost').text().trim();
+					console.log(shipping);
 					if (savings != ''){
 						message = message + '<br>' + product + ' :' + '<br>' + '<b>ORIGINAL PRICE:</b> ' + list_price + ' ,<b>NOW:</b> ' + 
-						price + ' , <b>YOU SAVE:</b> ' + savings + ' , <b>Availability:</b> ' + availability + '<br>' + 'Purchase: ' + item + '<br><br>';
+						price + ' , <b>YOU SAVE:</b> ' + savings + ' , <b>Availability:</b> ' + availability + ' , <b>Shipping:</b> ' + shipping+ '<br>' + 'Purchase: ' + item + '<br><br>';
 					}
 				});
 				return next_item();
